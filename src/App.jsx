@@ -1,5 +1,22 @@
-// Updated imports with lazy loading
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
+// Lazy-loaded pages
+const Home = lazy(() => import("./Pages/Home"));
+const Dashboard = lazy(() => import("./Pages/Dashboard"));
+const LeagueStandings = lazy(() => import("./Pages/LeagueStandings"));
+const Teams = lazy(() => import("./Pages/Teams"));
+const TeamDetails = lazy(() => import("./Pages/TeamDetails"));
+const MatchCenter = lazy(() => import("./Pages/MatchCenter"));
+const Comparison = lazy(() => import("./Pages/Comparison"));
+const Predictions = lazy(() => import("./Pages/Predictions"));
+const Statistics = lazy(() => import("./Pages/Statistics"));
+const Search = lazy(() => import("./Pages/Search"));
+const About = lazy(() => import("./Pages/About"));
 
 function App() {
   return (

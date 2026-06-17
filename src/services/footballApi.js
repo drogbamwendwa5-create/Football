@@ -5,7 +5,7 @@ const API_KEY = "52ad9e5212c62c527f5ed56e67a9e934";
 
 // Axios instance with base URL and auth header
 const api = axios.create({
-  baseURL: "https://api.football-data.org/v2",
+  baseURL: "/api",
   headers: {
     "X-Auth-Token": API_KEY,
   },
@@ -52,25 +52,6 @@ export const getMatches = async (leagueId) => {
 
 // ==================== MOCK DATA (fallback) ====================
 
-function delay(ms = 400) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-// (The existing MOCK_STANDINGS, MOCK_TEAMS, MOCK_MATCHES definitions remain unchanged)
-
-// ... (rest of the original mock data definitions omitted for brevity; they are retained in the file)
-
-
-
-const API_KEY = "52ad9e5212c62c527f5ed56e67a9e934";
-
-const api = axios.create({
-    baseURL: "/api",
-    headers: {
-        "X-Auth-Token": API_KEY,
-    },
-});
-
 // ========== MOCK DATA ==========
 
 const MOCK_STANDINGS = {
@@ -100,7 +81,7 @@ const MOCK_STANDINGS = {
   ],
   BL1: [
     { position: 1, team: { id: 21, name: "Bayern Munich" }, playedGames: 34, won: 26, draw: 4, lost: 4, goalsFor: 91, goalsAgainst: 32, goalDifference: 59, points: 82 },
-    { position: 2, team: { id: 22, name: "Borussia Dortmund" }, playedGames: 34, win: 22, draw: 6, lost: 6, goalsFor: 76, goalsAgainst: 40, goalDifference: 36, points: 72 },
+    { position: 2, team: { id: 22, name: "Borussia Dortmund" }, playedGames: 34, won: 22, draw: 6, lost: 6, goalsFor: 76, goalsAgainst: 40, goalDifference: 36, points: 72 },
     { position: 3, team: { id: 23, name: "RB Leipzig" }, playedGames: 34, won: 20, draw: 8, lost: 6, goalsFor: 68, goalsAgainst: 35, goalDifference: 33, points: 68 },
     { position: 4, team: { id: 24, name: "Bayer Leverkusen" }, playedGames: 34, won: 18, draw: 10, lost: 6, goalsFor: 72, goalsAgainst: 42, goalDifference: 30, points: 64 },
     { position: 5, team: { id: 25, name: "Eintracht Frankfurt" }, playedGames: 34, won: 15, draw: 8, lost: 11, goalsFor: 55, goalsAgainst: 48, goalDifference: 7, points: 53 },
@@ -155,7 +136,7 @@ const MOCK_TEAMS = {
     area: { name: "Spain" },
     clubColors: "Red / White",
     founded: 1900 + row.team.id,
-    crest: `https://crests.football-data.org/${row.team.id}.svg`,
+    crest: `./assets/crests/${row.team.id}.svg`,
   })),
   BL1: MOCK_STANDINGS.BL1.map((row) => ({
     id: row.team.id,
@@ -165,7 +146,7 @@ const MOCK_TEAMS = {
     area: { name: "Germany" },
     clubColors: "Red / White",
     founded: 1900 + row.team.id,
-    crest: `https://crests.football-data.org/${row.team.id}.svg`,
+    crest: `./assets/crests/${row.team.id}.svg`,
   })),
   SA: MOCK_STANDINGS.SA.map((row) => ({
     id: row.team.id,
@@ -175,7 +156,7 @@ const MOCK_TEAMS = {
     area: { name: "Italy" },
     clubColors: "Blue / Black",
     founded: 1900 + row.team.id,
-    crest: `https://crests.football-data.org/${row.team.id}.svg`,
+    crest: `./assets/crests/${row.team.id}.svg`,
   })),
   FL1: MOCK_STANDINGS.FL1.map((row) => ({
     id: row.team.id,
@@ -185,7 +166,7 @@ const MOCK_TEAMS = {
     area: { name: "France" },
     clubColors: "Blue / White",
     founded: 1900 + row.team.id,
-    crest: `https://crests.football-data.org/${row.team.id}.svg`,
+    crest: `./assets/crests/${row.team.id}.svg`,
   })),
 };
 
@@ -201,10 +182,6 @@ const MOCK_MATCHES = [
   { id: 109, homeTeam: { name: "PSG" }, awayTeam: { name: "Marseille" }, status: "TIMED" },
   { id: 110, homeTeam: { name: "Juventus" }, awayTeam: { name: "Napoli" }, status: "SCHEDULED" },
 ];
-
-function delay(ms = 400) {
-  return new Promise((r) => setTimeout(r, ms));
-}
 
 function getMockStandings(leagueId) {
   const data = MOCK_STANDINGS[leagueId] || MOCK_STANDINGS.PL;
@@ -227,20 +204,5 @@ function getMockMatches(leagueId) {
   }
   return { matches };
 }
-
-export const getStandings = async (leagueId) => {
-  await delay();
-  return getMockStandings(leagueId);
-};
-
-export const getTeams = async (leagueId) => {
-  await delay();
-  return getMockTeams(leagueId);
-};
-
-export const getMatches = async (leagueId) => {
-  await delay();
-  return getMockMatches(leagueId);
-};
 
 export default api;
