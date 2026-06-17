@@ -4,7 +4,7 @@ import GoalsChart from "../charts/GoalsChart";
 import WinDistributionChart from "../charts/WinDistributionChart";
 import FormTrendChart from "../charts/FormTrendChart";
 import LeagueComparisonChart from "../charts/LeagueComparisonChart";
-import { getStandings } from "../services/footballApi";
+import { getAllLeagueStandings } from "../services/footballApi";
 
 import { LEAGUE_IDS } from "../constants/leagues";
 
@@ -24,12 +24,7 @@ function Statistics() {
   useEffect(() => {
     let active = true;
     const load = async () => {
-      const all = [];
-      for (const lg of LEAGUES) {
-        const res = await getStandings(lg);
-        const table = res?.standings?.[0]?.table || [];
-        if (active) all.push(...table.map((r) => ({ ...r, league: lg })));
-      }
+      const all = await getAllLeagueStandings(LEAGUES);
       if (!active) return;
       const flat = all.filter((r) => r.team);
       setTopTeams(best(flat, 5, (a, b) => (b.points || 0) - (a.points || 0)).map((r) => ({ name: r.team.name, value: `${r.points || 0} pts` })));

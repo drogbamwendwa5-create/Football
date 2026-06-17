@@ -6,43 +6,84 @@ const api = axios.create({
   baseURL: API_BASE,
 });
 
+// ── Auth interceptor ──────────────────────────────────────────────
+api.interceptors.request.use((config) => {
+  const key = import.meta.env.VITE_FOOTBALL_API_KEY;
+  if (key) {
+    config.headers["X-Auth-Token"] = key;
+  }
+  return config;
+});
+
+// ── Simple in-memory cache (TTL = 5 min) ──────────────────────────
+const cache = new Map();
+const CACHE_TTL = 5 * 60 * 1000;
+
+function getCached(key) {
+  const entry = cache.get(key);
+  if (entry && Date.now() - entry.ts < CACHE_TTL) return entry.data;
+  return null;
+}
+
+function setCache(key, data) {
+  cache.set(key, { data, ts: Date.now() });
+}
+
+async function cachedGet(url, params = {}) {
+  const cacheKey = url + JSON.stringify(params);
+  const hit = getCached(cacheKey);
+  if (hit) return hit;
+  const response = await api.get(url, { params });
+  setCache(cacheKey, response.data);
+  return response.data;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────
 function getSeasonParam(leagueId) {
   return leagueId === WORLD_CUP.id ? { season: WORLD_CUP.season } : {};
 }
 
+/** Small delay to stay under the free-tier 10 req/min limit */
+export function delay(ms = 6500) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// ── Endpoints ─────────────────────────────────────────────────────
 export const getCompetition = async (leagueId) => {
-  const response = await api.get(`/competitions/${leagueId}`, {
-    params: getSeasonParam(leagueId),
-  });
-  return response.data;
+  return cachedGet(`/competitions/${leagueId}`, getSeasonParam(leagueId));
 };
 
 export const getStandings = async (leagueId) => {
-  const response = await api.get(`/competitions/${leagueId}/standings`, {
-    params: getSeasonParam(leagueId),
-  });
-  return response.data;
+  return cachedGet(`/competitions/${leagueId}/standings`, getSeasonParam(leagueId));
 };
 
 export const getTeams = async (leagueId) => {
-  const response = await api.get(`/competitions/${leagueId}/teams`, {
-    params: getSeasonParam(leagueId),
-  });
-  return response.data;
+  return cachedGet(`/competitions/${leagueId}/teams`, getSeasonParam(leagueId));
 };
 
 export const getMatches = async (leagueId, params = {}) => {
-  const response = await api.get(`/competitions/${leagueId}/matches`, {
-    params: { ...getSeasonParam(leagueId), ...params },
+  return cachedGet(`/competitions/${leagueId}/matches`, {
+    ...getSeasonParam(leagueId),
+    ...params,
   });
-  return response.data;
+};
+
+export const getScorers = async (leagueId, limit = 10) => {
+  return cachedGet(`/competitions/${leagueId}/scorers`, {
+    ...getSeasonParam(leagueId),
+    limit,
+  });
 };
 
 export const getTeam = async (teamId) => {
-  const response = await api.get(`/teams/${teamId}`);
-  return response.data;
+  return cachedGet(`/teams/${teamId}`);
 };
 
+export const getTeamMatches = async (teamId, params = {}) => {
+  return cachedGet(`/teams/${teamId}/matches`, params);
+};
+
+// ── Aggregate helpers ─────────────────────────────────────────────
 export const getTeamsAcrossLeagues = async (leagueIds = LEAGUE_IDS) => {
   const results = await Promise.all(
     leagueIds.map((leagueId) =>
@@ -61,12 +102,24 @@ export const findTeamById = async (teamId) => {
   }
 };
 
-api.interceptors.request.use((config) => {
-  const key = import.meta.env.VITE_FOOTBALL_API_KEY;
-  if (key) {
-    config.headers["X-Auth-Token"] = key;
+/**
+ * Fetch standings for all 5 domestic leagues (with delay between calls).
+ * Returns a flat array of standing rows, each tagged with its league id.
+ */
+export const getAllLeagueStandings = async (leagueIds) => {
+  const ids = leagueIds || LEAGUE_IDS.filter((id) => id !== "WC");
+  const all = [];
+  for (let i = 0; i < ids.length; i++) {
+    if (i > 0) await delay();
+    try {
+      const res = await getStandings(ids[i]);
+      const table = res?.standings?.[0]?.table || [];
+      all.push(...table.map((r) => ({ ...r, league: ids[i] })));
+    } catch {
+      // skip failed league
+    }
   }
-  return config;
-});
+  return all;
+};
 
 export default api;
