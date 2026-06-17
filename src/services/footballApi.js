@@ -1,8 +1,9 @@
 import axios from "axios";
 import { LEAGUE_IDS, WORLD_CUP } from "../constants/leagues";
 
+const API_BASE = "/api";
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: API_BASE,
 });
 
 function getSeasonParam(leagueId) {
@@ -59,5 +60,13 @@ export const findTeamById = async (teamId) => {
     return teams.find((team) => team.id === Number(teamId)) || null;
   }
 };
+
+api.interceptors.request.use((config) => {
+  const key = import.meta.env.VITE_FOOTBALL_API_KEY;
+  if (key) {
+    config.headers["X-Auth-Token"] = key;
+  }
+  return config;
+});
 
 export default api;
