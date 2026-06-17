@@ -24,7 +24,7 @@ function About() {
         </div>
         <div className="card">
           <h3>Data Source</h3>
-          <p>All data is provided by the football-data.org API. We use the free tier which provides comprehensive coverage of major European football competitions.</p>
+          <p>All data is provided by the <a href="https://www.football-data.org/" target="_blank" rel="noopener noreferrer" className="distinct-link">football-data.org</a> API. We use the free tier which provides comprehensive coverage of major European football competitions.</p>
         </div>
         <div className="card">
           <h3>Technology Stack</h3>

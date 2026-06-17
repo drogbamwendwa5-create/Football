@@ -143,6 +143,25 @@ a {
   transition: var(--transition);
 }
 
+/* Distinct Web/External Links */
+a.distinct-link,
+p a,
+.card a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+a.distinct-link:hover,
+p a:hover,
+.card a:hover {
+  color: var(--accent-light);
+  text-decoration-color: var(--primary);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
 img {
   max-width: 100%;
   height: auto;
