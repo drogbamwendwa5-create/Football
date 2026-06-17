@@ -1,14 +1,9 @@
 // Live Football Data API integration
 import axios from "axios";
 
-const API_KEY = "52ad9e5212c62c527f5ed56e67a9e934";
-
-// Axios instance with base URL and auth header
+// Requests go through /api — proxied by Vite in dev and Vercel serverless in production
 const api = axios.create({
   baseURL: "/api",
-  headers: {
-    "X-Auth-Token": API_KEY,
-  },
 });
 
 /**
@@ -136,7 +131,7 @@ const MOCK_TEAMS = {
     area: { name: "Spain" },
     clubColors: "Red / White",
     founded: 1900 + row.team.id,
-    crest: `./assets/crests/${row.team.id}.svg`,
+    crest: `/assets/crests/${row.team.id}.svg`,
   })),
   BL1: MOCK_STANDINGS.BL1.map((row) => ({
     id: row.team.id,
@@ -146,7 +141,7 @@ const MOCK_TEAMS = {
     area: { name: "Germany" },
     clubColors: "Red / White",
     founded: 1900 + row.team.id,
-    crest: `./assets/crests/${row.team.id}.svg`,
+    crest: `/assets/crests/${row.team.id}.svg`,
   })),
   SA: MOCK_STANDINGS.SA.map((row) => ({
     id: row.team.id,
@@ -156,7 +151,7 @@ const MOCK_TEAMS = {
     area: { name: "Italy" },
     clubColors: "Blue / Black",
     founded: 1900 + row.team.id,
-    crest: `./assets/crests/${row.team.id}.svg`,
+    crest: `/assets/crests/${row.team.id}.svg`,
   })),
   FL1: MOCK_STANDINGS.FL1.map((row) => ({
     id: row.team.id,
@@ -166,7 +161,7 @@ const MOCK_TEAMS = {
     area: { name: "France" },
     clubColors: "Blue / White",
     founded: 1900 + row.team.id,
-    crest: `./assets/crests/${row.team.id}.svg`,
+    crest: `/assets/crests/${row.team.id}.svg`,
   })),
 };
 

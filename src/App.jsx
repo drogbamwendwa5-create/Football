@@ -1,9 +1,10 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import Loading from "./Components/Loading";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./Pages/Home"));
@@ -24,19 +25,21 @@ function App() {
       <FavoritesProvider>
         <BrowserRouter>
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/standings" element={<LeagueStandings />} />
-            <Route path="/teams" element={<Teams />} />
-            <Route path="/team/:id" element={<TeamDetails />} />
-            <Route path="/matches" element={<MatchCenter />} />
-            <Route path="/comparison" element={<Comparison />} />
-            <Route path="/predictions" element={<Predictions />} />
-            <Route path="/statistics" element={<Statistics />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/standings" element={<LeagueStandings />} />
+              <Route path="/teams" element={<Teams />} />
+              <Route path="/team/:id" element={<TeamDetails />} />
+              <Route path="/matches" element={<MatchCenter />} />
+              <Route path="/comparison" element={<Comparison />} />
+              <Route path="/predictions" element={<Predictions />} />
+              <Route path="/statistics" element={<Statistics />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </Suspense>
           <Footer />
         </BrowserRouter>
       </FavoritesProvider>
