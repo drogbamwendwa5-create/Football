@@ -31,7 +31,7 @@ function Teams() {
     <div className="main-container">
       <div className="page-header">
         <h1>Teams</h1>
-        <p>Browse teams from top European football leagues.</p>
+        <p>Browse teams with official crests from top leagues and the World Cup.</p>
       </div>
       <LeagueSelector onSelect={setLeague} selected={league} />
       {loading && <Loading message="Loading teams..." />}

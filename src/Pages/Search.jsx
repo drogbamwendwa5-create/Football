@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import SearchBar from "../Components/SearchBar";
-import { getTeams } from "../services/footballApi";
+import { getTeamsAcrossLeagues } from "../services/footballApi";
 
 function Search() {
   const [results, setResults] = useState([]);
@@ -9,11 +10,7 @@ function Search() {
   const handleSearch = async (query) => {
     setSearched(true);
     try {
-      const leagues = ["PL", "PD", "BL1", "SA", "FL1"];
-      const allTeams = await Promise.all(
-        leagues.map((league) => getTeams(league).catch(() => ({ teams: [] })))
-      );
-      const flat = allTeams.flatMap((data) => data.teams || []);
+      const flat = await getTeamsAcrossLeagues();
       const filtered = flat.filter((team) =>
         team.name?.toLowerCase().includes(query.toLowerCase())
       );
@@ -27,22 +24,20 @@ function Search() {
     <div className="main-container">
       <div className="page-header">
         <h1>Search</h1>
-        <p>Search for teams across all leagues.</p>
+        <p>Search for teams across all leagues and the World Cup.</p>
       </div>
       <SearchBar onSearch={handleSearch} placeholder="Search teams..." />
       {searched && results.length === 0 && (
-        <p style={{ textAlign: "center", color: "var(--text-light)", marginTop: "2rem" }}>
-          No teams found matching your search.
-        </p>
+        <p className="empty-message">No teams found matching your search.</p>
       )}
       {results.length > 0 && (
         <div className="card-grid">
           {results.map((team) => (
-            <div key={team.id} className="team-card" onClick={() => window.location.href = `/team/${team.id}`}>
-              {team.crest && <img src={team.crest} alt={team.name} />}
+            <Link key={team.id} to={`/team/${team.id}`} className="team-card">
+              {team.crest && <img src={team.crest} alt={team.name} className="team-crest" />}
               <h4>{team.name}</h4>
-              {team.area?.name && <p style={{ fontSize: "0.85rem", color: "var(--text-light)" }}>{team.area.name}</p>}
-            </div>
+              {team.area?.name && <p className="team-meta">{team.area.name}</p>}
+            </Link>
           ))}
         </div>
       )}

@@ -6,7 +6,9 @@ import FormTrendChart from "../charts/FormTrendChart";
 import LeagueComparisonChart from "../charts/LeagueComparisonChart";
 import { getStandings } from "../services/footballApi";
 
-const LEAGUES = ["PL", "PD", "BL1", "SA", "FL1"];
+import { LEAGUE_IDS } from "../constants/leagues";
+
+const LEAGUES = LEAGUE_IDS.filter((id) => id !== "WC");
 
 function best(list, n, getVal) {
   return list.slice().sort(getVal).slice(0, n);

@@ -18,6 +18,7 @@ const Predictions = lazy(() => import("./Pages/Predictions"));
 const Statistics = lazy(() => import("./Pages/Statistics"));
 const Search = lazy(() => import("./Pages/Search"));
 const About = lazy(() => import("./Pages/About"));
+const WorldCup = lazy(() => import("./Pages/WorldCup"));
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path="/predictions" element={<Predictions />} />
               <Route path="/statistics" element={<Statistics />} />
               <Route path="/search" element={<Search />} />
+              <Route path="/world-cup" element={<WorldCup />} />
               <Route path="/about" element={<About />} />
             </Routes>
           </Suspense>

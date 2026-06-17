@@ -11,6 +11,7 @@ function TeamCard({ team }) {
         <img
           src={team.crest}
           alt={`${team.name} crest`}
+          className="team-crest"
           onError={(e) => {
             e.currentTarget.style.display = "none";
           }}

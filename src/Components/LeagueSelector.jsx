@@ -1,15 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { LEAGUES } from "../constants/leagues";
 
-const LEAGUES = [
-  { id: "PL", name: "Premier League" },
-  { id: "PD", name: "La Liga" },
-  { id: "BL1", name: "Bundesliga" },
-  { id: "SA", name: "Serie A" },
-  { id: "FL1", name: "Ligue 1" },
-];
-
-function LeagueSelector({ onSelect, selected = "PL" }) {
+function LeagueSelector({ onSelect, selected = "PL", leagues = LEAGUES }) {
   const [activeLeague, setActiveLeague] = useState(selected);
+
+  useEffect(() => {
+    setActiveLeague(selected);
+  }, [selected]);
 
   const handleSelect = (leagueId) => {
     setActiveLeague(leagueId);
@@ -18,7 +15,7 @@ function LeagueSelector({ onSelect, selected = "PL" }) {
 
   return (
     <div className="league-selector">
-      {LEAGUES.map((league) => (
+      {leagues.map((league) => (
         <button
           key={league.id}
           className={`league-btn ${activeLeague === league.id ? "active" : ""}`}

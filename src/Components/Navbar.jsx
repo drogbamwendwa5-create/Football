@@ -18,6 +18,7 @@ function Navbar() {
         <Link to="/standings" onClick={() => setMenuOpen(false)}>Standings</Link>
         <Link to="/teams" onClick={() => setMenuOpen(false)}>Teams</Link>
         <Link to="/matches" onClick={() => setMenuOpen(false)}>Matches</Link>
+        <Link to="/world-cup" onClick={() => setMenuOpen(false)}>World Cup</Link>
         <Link to="/comparison" onClick={() => setMenuOpen(false)}>Compare</Link>
         <Link to="/predictions" onClick={() => setMenuOpen(false)}>Predict</Link>
         <Link to="/statistics" onClick={() => setMenuOpen(false)}>Stats</Link>

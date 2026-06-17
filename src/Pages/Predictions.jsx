@@ -3,13 +3,9 @@ import { motion } from "framer-motion";
 import { predictMatch } from "../utils/predictionEngine";
 import { getStandings } from "../services/footballApi";
 
-const LEAGUES = {
-  PL: "Premier League",
-  PD: "La Liga",
-  BL1: "Bundesliga",
-  SA: "Serie A",
-  FL1: "Ligue 1",
-};
+import { LEAGUE_NAMES } from "../constants/leagues";
+
+const LEAGUES = LEAGUE_NAMES;
 
 function Predictions() {
   const [league, setLeague] = useState("PL");
@@ -67,7 +63,7 @@ function Predictions() {
 
       <motion.div className="card" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
         <div className="league-selector" style={{ marginBottom: "1rem" }}>
-          {Object.entries(LEAGUES).map(([key, label]) => (
+          {Object.entries(LEAGUES).filter(([key]) => key !== "WC").map(([key, label]) => (
             <button key={key} className={`league-btn ${league === key ? "active" : ""}`} onClick={() => setLeague(key)}>
               {label}
             </button>
