@@ -1,16 +1,22 @@
 import axios from "axios";
 import { LEAGUE_IDS, WORLD_CUP } from "../constants/leagues";
 
-const API_BASE = "/api";
+const isLocalhost = typeof window !== "undefined" && 
+  (window.location.hostname === "localhost" || 
+   window.location.hostname === "127.0.0.1" || 
+   window.location.hostname.includes("vercel.app"));
+
+const API_BASE = isLocalhost ? "/api" : "https://corsproxy.io/?https://api.football-data.org/v4";
+
 const api = axios.create({
   baseURL: API_BASE,
 });
 
 // ── Auth interceptor ──────────────────────────────────────────────
 api.interceptors.request.use((config) => {
-  const key = import.meta.env.VITE_FOOTBALL_API_KEY;
-  if (key) {
-    config.headers["X-Auth-Token"] = key;
+  const apiToken = import.meta.env.VITE_FOOTBALL_API_KEY;
+  if (apiToken) {
+    config.headers["X-Auth-Token"] = apiToken;
   }
   return config;
 });

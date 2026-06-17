@@ -20,11 +20,15 @@ const Search = lazy(() => import("./Pages/Search"));
 const About = lazy(() => import("./Pages/About"));
 const WorldCup = lazy(() => import("./Pages/WorldCup"));
 
+const basename = typeof window !== "undefined" && window.location.hostname.includes("github.io")
+  ? "/Football"
+  : "";
+
 function App() {
   return (
     <ThemeProvider>
       <FavoritesProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
           <Navbar />
           <Suspense fallback={<Loading />}>
             <Routes>
