@@ -1,21 +1,7 @@
 /* Football Intelligence - Premium Design System */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-:root,
-[data-theme="dark"] {
-  /* Primary - Deep Forest Green */
-  --primary: #1a6b3a;
-  --primary-light: #219653;
-  --primary-dark: #0d4a26;
-  --primary-glow: rgba(26, 107, 58, 0.3);
-
-  /* Accent - Gold */
-  --accent: #f0b429;
-  --accent-light: #f7c948;
-  --accent-dark: #d4941a;
-  --accent-glow: rgba(240, 180, 41, 0.3);
-
-  /* Backgrounds */
+:root {
   --bg: #0f1117;
   --bg-card: rgba(255, 255, 255, 0.05);
   --bg-card-hover: rgba(255, 255, 255, 0.08);
@@ -23,36 +9,19 @@
   --bg-glass: rgba(255, 255, 255, 0.06);
   --bg-gradient: linear-gradient(135deg, #0d4a26 0%, #1a6b3a 50%, #0f1117 100%);
 
-  /* Text */
   --text: #e0e0e0;
   --text-light: #9ca3af;
   --text-muted: #6b7280;
   --text-white: #ffffff;
   --text-dark: #111827;
 
-  /* Borders */
   --border: rgba(255, 255, 255, 0.1);
   --border-light: rgba(255, 255, 255, 0.05);
 
-  /* Shared */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 30px var(--primary-glow);
-  --radius-sm: 6px;
-  --radius: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --success: #10b981;
-  --success-bg: rgba(16, 185, 129, 0.15);
-  --danger: #ef4444;
-  --danger-bg: rgba(239, 68, 68, 0.15);
-  --warning: #f59e0b;
-  --warning-bg: rgba(245, 158, 11, 0.15);
-  --info: #3b82f6;
-  --info-bg: rgba(59, 130, 246, 0.15);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="light"] {
@@ -77,19 +46,43 @@
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
 }
 
-/* Light mode adjustments */
+:root {
+  --primary: #1a6b3a;
+  --primary-light: #219653;
+  --primary-dark: #0d4a26;
+  --primary-glow: rgba(26, 107, 58, 0.3);
+  --accent: #f0b429;
+  --accent-light: #f7c948;
+  --accent-dark: #d4941a;
+  --accent-glow: rgba(240, 180, 41, 0.3);
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.15);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.15);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light mode UI adjustments */
+[data-theme="light"] body { background: var(--bg); color: var(--text); }
 [data-theme="light"] .navbar { background: var(--bg-nav); }
 [data-theme="light"] .card:hover { background: var(--bg-card-hover); }
 [data-theme="light"] .hero-section { background: linear-gradient(135deg, rgba(226, 232, 240, 0.6) 0%, rgba(241, 245, 249, 0.95) 100%); }
 [data-theme="light"] .page-header h1 { background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-[data-theme="light"] .navbar .nav-links a:hover { background: rgba(0, 0, 0, 0.04); }
-[data-theme="light"] .stat-value { background: linear-gradient(135deg, var(--primary), var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] h4 { color: var(--text-dark); }
-[data-theme="light"] .card h3 { color: var(--text-dark); }
-[data-theme="light"] .chart-container h3 { color: var(--text-dark); }
+[data-theme="light"] .navbar .nav-links a:hover { background: rgba(0, 0, 0, 0.04); color: var(--text-dark); }
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] h4, [data-theme="light"] .card h3, [data-theme="light"] .team-card h4, [data-theme="light"] .chart-container h3 { color: var(--text-dark); }
 [data-theme="light"] .team-card h4 { color: var(--text-dark); }
-[data-theme="light"] body { background: var(--bg); }
-[data-theme="light"] .data-table thead { background: linear-gradient(135deg, rgba(26, 107, 58, 0.15), rgba(13, 74, 38, 0.15)); }
+[data-theme="light"] .stat-value { background: linear-gradient(135deg, var(--primary), var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+[data-theme="light"] .data-table tbody tr td:first-child { color: var(--primary); }
+[data-theme="light"] .league-btn { background: var(--bg-glass); color: var(--text-light); }
 
 * {
   margin: 0;
