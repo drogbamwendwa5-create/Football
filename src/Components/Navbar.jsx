@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" style={{ textDecoration: "none" }}><h2>Football IQ</h2></Link>
-      <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
+      <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
         {menuOpen ? "✕" : "☰"}
       </button>
       <div className={`nav-links ${menuOpen ? "open" : ""}`}>
@@ -23,7 +23,7 @@ function Navbar() {
         <Link to="/statistics" onClick={() => setMenuOpen(false)}>Stats</Link>
         <Link to="/search" onClick={() => setMenuOpen(false)}>Search</Link>
         <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
-        <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme">
+        <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme" aria-label="Toggle dark mode">
           {darkMode ? "☀️" : "🌙"}
         </button>
       </div>

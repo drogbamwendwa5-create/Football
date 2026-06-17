@@ -83,7 +83,7 @@ const MOCK_TEAMS = {
     area: { name: "England" },
     clubColors: "Blue / White",
     founded: 1900 + row.team.id,
-    crest: `/crests/${row.team.id}.svg`,
+    crest: `https://crests.football-data.org/${row.team.id}.svg`,
   })),
   PD: MOCK_STANDINGS.PD.map((row) => ({
     id: row.team.id,
@@ -93,7 +93,7 @@ const MOCK_TEAMS = {
     area: { name: "Spain" },
     clubColors: "Red / White",
     founded: 1900 + row.team.id,
-    crest: `/crests/${row.team.id}.svg`,
+    crest: `https://crests.football-data.org/${row.team.id}.svg`,
   })),
   BL1: MOCK_STANDINGS.BL1.map((row) => ({
     id: row.team.id,
@@ -103,7 +103,7 @@ const MOCK_TEAMS = {
     area: { name: "Germany" },
     clubColors: "Red / White",
     founded: 1900 + row.team.id,
-    crest: `/crests/${row.team.id}.svg`,
+    crest: `https://crests.football-data.org/${row.team.id}.svg`,
   })),
   SA: MOCK_STANDINGS.SA.map((row) => ({
     id: row.team.id,
@@ -113,7 +113,7 @@ const MOCK_TEAMS = {
     area: { name: "Italy" },
     clubColors: "Blue / Black",
     founded: 1900 + row.team.id,
-    crest: `/crests/${row.team.id}.svg`,
+    crest: `https://crests.football-data.org/${row.team.id}.svg`,
   })),
   FL1: MOCK_STANDINGS.FL1.map((row) => ({
     id: row.team.id,
@@ -123,7 +123,7 @@ const MOCK_TEAMS = {
     area: { name: "France" },
     clubColors: "Blue / White",
     founded: 1900 + row.team.id,
-    crest: `/crests/${row.team.id}.svg`,
+    crest: `https://crests.football-data.org/${row.team.id}.svg`,
   })),
 };
 

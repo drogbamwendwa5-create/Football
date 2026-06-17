@@ -1,20 +1,20 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-const data = [
-  { match: "Match 1", form: 3 },
-  { match: "Match 2", form: 1 },
-  { match: "Match 3", form: 0 },
-  { match: "Match 4", form: 3 },
-  { match: "Match 5", form: 3 },
-  { match: "Match 6", form: 1 },
-];
+function buildData(rows = []) {
+  const top = rows.slice(0, 10);
+  return top.map((r) => ({
+    match: r.team?.name || `Team ${r.position}`,
+    form: Number(r.points || 0),
+  }));
+}
 
-export default function FormTrendChart({ title = "Form Trend" }) {
+export default function FormTrendChart({ title = "Form Trend", data = [] }) {
+  const chartData = buildData(data);
   return (
     <div className="chart-container">
       <h3>{title}</h3>
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data}>
+        <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="match" />
           <YAxis />

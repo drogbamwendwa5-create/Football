@@ -24,7 +24,7 @@ function MatchCard({ match }) {
           <h4>{awayTeam.name}</h4>
         </div>
       </div>
-      <p style={{ textAlign: "center", marginTop: "0.5rem", fontSize: "0.85rem", color: "var(--text-light)" }}>
+      <p style={{ textAlign: "center", marginTop: "0.5rem", fontSize: "0.85rem", color: "var(--text)", fontWeight: 500 }}>
         {status === "FINISHED" ? "Full Time" : status === "TIMED" ? "Scheduled" : status}
       </p>
     </div>
