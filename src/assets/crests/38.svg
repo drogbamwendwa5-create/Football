@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs><linearGradient id="g38" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6B32A8"/><stop offset="100%" stop-color="#6B32A8" stop-opacity="0.75"/></linearGradient></defs>
+  <circle cx="60" cy="60" r="56" fill="url(#g38)" stroke="#ffffff" stroke-width="4"/>
+  <circle cx="60" cy="60" r="46" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+  <text x="60" y="72" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-weight="900" font-size="32" letter-spacing="2">FIO</text>
+  <text x="60" y="96" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-weight="700" font-size="12" opacity="0.85">ID 38</text>
+</svg>
