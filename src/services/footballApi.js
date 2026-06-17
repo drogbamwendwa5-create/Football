@@ -14,7 +14,7 @@ const api = axios.create({
 
 // ── Auth interceptor ──────────────────────────────────────────────
 api.interceptors.request.use((config) => {
-  const apiToken = import.meta.env.VITE_FOOTBALL_API_KEY;
+  const apiToken = import.meta.env.VITE_FOOTBALL_API_KEY || "485aafd43cb2409695838c24d67d59a6";
   if (apiToken) {
     config.headers["X-Auth-Token"] = apiToken;
   }

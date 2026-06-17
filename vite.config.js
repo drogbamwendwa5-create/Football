@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
           rewrite: (path) => path.replace(/^\/api/, ''),
           configure: (proxy) => {
             proxy.on('proxyReq', (proxyReq) => {
-              proxyReq.setHeader('X-Auth-Token', env.VITE_FOOTBALL_API_KEY || '')
+              proxyReq.setHeader('X-Auth-Token', env.VITE_FOOTBALL_API_KEY || '485aafd43cb2409695838c24d67d59a6')
             })
             proxy.on('proxyRes', (proxyRes, req) => {
               console.log('PROXY STATUS:', proxyRes.statusCode, req.url)

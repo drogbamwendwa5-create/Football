@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import Navbar from "./Components/Navbar";
@@ -20,15 +20,11 @@ const Search = lazy(() => import("./Pages/Search"));
 const About = lazy(() => import("./Pages/About"));
 const WorldCup = lazy(() => import("./Pages/WorldCup"));
 
-const basename = typeof window !== "undefined" && window.location.hostname.includes("github.io")
-  ? "/Football"
-  : "";
-
 function App() {
   return (
     <ThemeProvider>
       <FavoritesProvider>
-        <BrowserRouter basename={basename}>
+        <HashRouter>
           <Navbar />
           <Suspense fallback={<Loading />}>
             <Routes>
@@ -47,7 +43,7 @@ function App() {
             </Routes>
           </Suspense>
           <Footer />
-        </BrowserRouter>
+        </HashRouter>
       </FavoritesProvider>
     </ThemeProvider>
   );
