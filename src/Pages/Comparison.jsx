@@ -28,8 +28,8 @@ function Comparison() {
           setTeam1Id(String(table[0]?.team?.id || ""));
           setTeam2Id(String(table[1]?.team?.id || ""));
         }
-      } catch {
-        if (active) setError("Failed to load standings.");
+      } catch (err) {
+        if (active) setError(err.message || "Failed to load standings.");
       } finally {
         if (active) setLoading(false);
       }

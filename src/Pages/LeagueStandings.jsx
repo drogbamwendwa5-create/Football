@@ -19,8 +19,8 @@ function LeagueStandings() {
         const data = await getStandings(league);
         const tables = data.standings || [];
         setStandings(tables[0]?.table || []);
-      } catch {
-        setError("Failed to load standings. Please try again later.");
+      } catch (err) {
+        setError(err.message || "Failed to load standings. Please try again later.");
       } finally {
         setLoading(false);
       }

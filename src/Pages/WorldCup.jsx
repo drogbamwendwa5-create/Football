@@ -37,8 +37,8 @@ function WorldCup() {
         setTeams(teamsData.teams || []);
         setStandings(standingsData.standings || []);
         setMatches(matchesData.matches || []);
-      } catch {
-        setError("Failed to load World Cup data. Check your API key and try again.");
+      } catch (err) {
+        setError(err.message || "Failed to load World Cup data. Check your API key and try again.");
       } finally {
         setLoading(false);
       }

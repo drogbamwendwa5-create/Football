@@ -33,8 +33,8 @@ function Dashboard() {
       try {
         const all = await getAllLeagueStandings();
         if (active) setStandings(all);
-      } catch {
-        if (active) setError("Failed to load dashboard data.");
+      } catch (err) {
+        if (active) setError(err.message || "Failed to load dashboard data.");
       } finally {
         if (active) setLoading(false);
       }

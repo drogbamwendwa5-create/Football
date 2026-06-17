@@ -19,7 +19,7 @@ function MatchCenter() {
         const data = await getMatches(league);
         setMatches(data.matches || []);
       } catch (err) {
-        setError("Failed to load matches.");
+        setError(err.message || "Failed to load matches.");
       } finally {
         setLoading(false);
       }

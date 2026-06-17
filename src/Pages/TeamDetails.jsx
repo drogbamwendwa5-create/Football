@@ -18,8 +18,8 @@ function TeamDetails() {
         const found = await findTeamById(id);
         if (found) setTeam(found);
         else setError("Team not found.");
-      } catch {
-        setError("Failed to load team details.");
+      } catch (err) {
+        setError(err.message || "Failed to load team details.");
       } finally {
         setLoading(false);
       }

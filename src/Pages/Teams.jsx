@@ -19,7 +19,7 @@ function Teams() {
         const data = await getTeams(league);
         setTeams(data.teams || []);
       } catch (err) {
-        setError("Failed to load teams.");
+        setError(err.message || "Failed to load teams.");
       } finally {
         setLoading(false);
       }

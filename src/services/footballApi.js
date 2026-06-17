@@ -21,18 +21,40 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// ── Simple in-memory cache (TTL = 5 min) ──────────────────────────
-const cache = new Map();
-const CACHE_TTL = 5 * 60 * 1000;
+// ── Response interceptor for Rate Limits (429) ────────────────────
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 429) {
+      return Promise.reject(new Error("API Rate Limit Exceeded (10 requests/minute on free tier). Please wait a moment before trying again."));
+    }
+    return Promise.reject(error);
+  }
+);
+
+// ── sessionStorage-backed cache (TTL = 15 min) ────────────────────
+const CACHE_TTL = 15 * 60 * 1000;
 
 function getCached(key) {
-  const entry = cache.get(key);
-  if (entry && Date.now() - entry.ts < CACHE_TTL) return entry.data;
+  try {
+    const entryStr = sessionStorage.getItem("fb_cache_" + key);
+    if (!entryStr) return null;
+    const entry = JSON.parse(entryStr);
+    if (Date.now() - entry.ts < CACHE_TTL) return entry.data;
+    sessionStorage.removeItem("fb_cache_" + key);
+  } catch (e) {
+    // ignore storage errors
+  }
   return null;
 }
 
 function setCache(key, data) {
-  cache.set(key, { data, ts: Date.now() });
+  try {
+    const entry = { data, ts: Date.now() };
+    sessionStorage.setItem("fb_cache_" + key, JSON.stringify(entry));
+  } catch (e) {
+    // ignore storage errors
+  }
 }
 
 async function cachedGet(url, params = {}) {
