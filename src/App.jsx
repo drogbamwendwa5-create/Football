@@ -1,19 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "./context/ThemeContext";
-import { FavoritesProvider } from "./context/FavoritesContext";
-import Navbar from "./Components/Navbar";
-import Footer from "./Components/Footer";
-import Home from "./Pages/Home";
-import Dashboard from "./Pages/Dashboard";
-import LeagueStandings from "./Pages/LeagueStandings";
-import Teams from "./Pages/Teams";
-import TeamDetails from "./Pages/TeamDetails";
-import MatchCenter from "./Pages/MatchCenter";
-import Comparison from "./Pages/Comparison";
-import Predictions from "./Pages/Predictions";
-import Statistics from "./Pages/Statistics";
-import Search from "./Pages/Search";
-import About from "./Pages/About";
+// Updated imports with lazy loading
+
 
 function App() {
   return (
